@@ -13,7 +13,7 @@
 
 #player {
     height: 40px;
-    background-color: #fff;
+    outline: none;
 }
 
 .entry-content .mejs-container .mejs-controls {
@@ -21,7 +21,6 @@
 }
 
 #playlist {
-    height: Calc(100vh - 510px);
     overflow-y: auto;
 }
 
@@ -69,5 +68,15 @@ span.truncate {
 }
 
 .div-style-1 {
-    height: 250px;
+    height: Calc(100vh - 500px);
+}
+
+#img-song {
+    width: 100%;
+    height: 100%;
+}
+
+#select-genero {
+    background-color: #000;
+    outline: none;
 }

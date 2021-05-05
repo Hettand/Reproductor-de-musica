@@ -1,221 +1,106 @@
-$(document).ready(function() {
-        getListGeneros();
-        $("#select-genero").val(1);
-        getSongs();
-        initPayer();
+// géneros
+let generos = [{
+        id: 1,
+        name: "Rock y Ska Punk",
+        img: "img/music/ska_rock/ska_rock.jpg"
+    },
+    {
+        id: 2,
+        name: "Bachata",
+        img: "img/music/bachata/bachata.png"
+
+    }
+]
+
+// canciones
+let mySongs = [{
+        id: 1,
+        idGenero: 2,
+        name: "Cupido Esta Solo - LIVE VERSION",
+        artist: "Grupo Extra Touch",
+        path: "music/bachata/LIVE VERSION - Cupido Esta Solo [Grupo Extra Touch].mp3",
+        image: "img/music/bachata/Grupo_extra.jpg"
+    },
+    {
+        id: 2,
+        idGenero: 2,
+        name: "Deja vu",
+        artist: "Shakira feat Prince Royce",
+        path: "music/bachata/Deja_vu.mp3",
+        image: "img/music/bachata/Shakira_Prince.jpg"
+    }, {
+        id: 3,
+        idGenero: 2,
+        name: "Carmin",
+        artist: "Juan Luis Guerra feat Romeo Santos",
+        path: "music/bachata/Carmin.mp3",
+        image: "img/music/bachata/Carmin.jpg"
+    }, {
+        id: 4,
+        idGenero: 2,
+        name: "Centavito",
+        artist: "Romeo Santos",
+        path: "music/bachata/Centavito.mp3",
+        image: "img/music/bachata/Centavito.jpg"
+    },
+    {
+        id: 5,
+        idGenero: 2,
+        name: "Necio",
+        artist: "Romeo Santos",
+        path: "music/bachata/Necio.mp3",
+        image: "img/music/bachata/necio.jpg"
+    },
+    {
+        id: 6,
+        idGenero: 1,
+        name: "Arrancacorazones",
+        artist: "Attaque 77",
+        path: "music/ska_rock/Attaque 77 - Arrancacorazones.mp3",
+        image: "img/music/ska_rock/arrancacorazones.jpg"
+    },
+    {
+        id: 7,
+        idGenero: 1,
+        name: "Qué puedo decir",
+        artist: "Ska-p",
+        path: "music/ska_rock/Que_Puedo_Decir.mp3",
+        image: "img/music/ska_rock/skap.jpg"
+    },
+    {
+        id: 8,
+        idGenero: 1,
+        name: "Zafar",
+        artist: "La vela puerca",
+        path: "music/ska_rock/La Vela Puerca  - Zafar.mp3",
+        image: "img/music/ska_rock/la_vela.jpg"
+    },
+    {
+        id: 9,
+        idGenero: 1,
+        name: "Ya no sé que hacer conmigo",
+        artist: "Cuarteto de nos",
+        path: "music/ska_rock/Ya no sé qué hacer conmigo.mp3",
+        image: "img/music/ska_rock/no_se.jpg"
+    },
+    {
+        id: 10,
+        idGenero: 1,
+        name: "Persiana americana",
+        artist: "Soda Stereo",
+        path: "music/ska_rock/Persiana Americana Letra.mp3",
+        image: "img/music/ska_rock/persiana.jpg"
     }
 
-);
+]
 
-let audio = document.getElementById('player');
-
-function getTemp(id_temp) {
-    let temp = $(id_temp).html();
-    let compilar = Handlebars.compile(temp);
-    let compilada = compilar();
-    $("#show-temp").html(compilada);
-}
-
-function show() {
-    $(".showHeader").toggle(1000);
-    $(".showBtn").toggle(1500);
-    $("#show-temp").toggle(2000);
-}
-
-let generos = {
-    generos: [{
-            id: 1,
-            name: "Rock y Ska Punk",
-            img: "img/music/ska_rock/ska_rock.jpg"
-        },
-        {
-            id: 2,
-            name: "Bachata",
-            img: "img/music/bachata/bachata.png"
-
-        }
-    ]
-};
-
-let mjson = {
-    songs: [{
-            id: 1,
-            idGenero: 2,
-            name: "Cupido Esta Solo - LIVE VERSION",
-            artist: "Grupo Extra Touch",
-            path: "music/bachata/LIVE VERSION - Cupido Esta Solo [Grupo Extra Touch].mp3",
-            image: "img/music/bachata/Grupo_extra.jpg"
-        },
-        {
-            id: 2,
-            idGenero: 2,
-            name: "Deja vu",
-            artist: "Shakira feat Prince Royce",
-            path: "music/bachata/Deja_vu.mp3",
-            image: "img/music/bachata/Shakira_Prince.jpg"
-        }, {
-            id: 3,
-            idGenero: 2,
-            name: "Carmin",
-            artist: "Juan Luis Guerra feat Romeo Santos",
-            path: "music/bachata/Carmin.mp3",
-            image: "img/music/bachata/Carmin.jpg"
-        }, {
-            id: 4,
-            idGenero: 2,
-            name: "Centavito",
-            artist: "Romeo Santos",
-            path: "music/bachata/Centavito.mp3",
-            image: "img/music/bachata/Centavito.jpg"
-        },
-        {
-            id: 5,
-            idGenero: 2,
-            name: "Necio",
-            artist: "Romeo Santos",
-            path: "music/bachata/Necio.mp3",
-            image: "img/music/bachata/necio.jpg"
-        },
-        {
-            id: 6,
-            idGenero: 1,
-            name: "Arrancacorazones",
-            artist: "Attaque 77",
-            path: "music/ska_rock/Attaque 77 - Arrancacorazones.mp3",
-            image: "img/music/ska_rock/arrancacorazones.jpg"
-        },
-        {
-            id: 7,
-            idGenero: 1,
-            name: "Qué puedo decir",
-            artist: "Ska-p",
-            path: "music/ska_rock/Que_Puedo_Decir.mp3",
-            image: "img/music/ska_rock/skap.jpg"
-        },
-        {
-            id: 8,
-            idGenero: 1,
-            name: "Zafar",
-            artist: "La vela puerca",
-            path: "music/ska_rock/La Vela Puerca  - Zafar.mp3",
-            image: "img/music/ska_rock/la_vela.jpg"
-        },
-        {
-            id: 9,
-            idGenero: 1,
-            name: "Ya no sé que hacer conmigo",
-            artist: "Cuarteto de nos",
-            path: "music/ska_rock/Ya no sé qué hacer conmigo.mp3",
-            image: "img/music/ska_rock/no_se.jpg"
-        },
-        {
-            id: 10,
-            idGenero: 1,
-            name: "Persiana americana",
-            artist: "Soda Stereo",
-            path: "music/ska_rock/Persiana Americana Letra.mp3",
-            image: "img/music/ska_rock/persiana.jpg"
-        }
-
-    ]
-};
-
+// objeto con una lista vacía
 let songsGenero = {
     songs: []
 };
 
-function getListGeneros() {
-    let temp = $("#temp_generos").html();
-    let compilar = Handlebars.compile(temp);
-    let compilado = compilar(generos);
-    $("#select-genero").html(compilado);
-}
 
-$("#select-genero").change(function() {
-    getSongs();
-});
-
-audio.onpause = function() {
-    hideEcualizador();
-};
-
-audio.onabort = function() {
-    hideEcualizador();
-};
-audio.onplay = function() {
-    if ($("#ecualizador-id").val() !== "") {
-        showEcualizador($("#ecualizador-id").val());
-    }
-};
-
-function getSongs() {
-    audio.pause();
-    $("#player").attr("src", "");
-    $("#title-song").text("");
-    $("#title-song").attr("uk-tooltip", "title: Selecciona una canción");
-
-    let temp = $("#temp_songs").html();
-    let compilar = Handlebars.compile(temp);
-
-    let idGenero = parseInt($("#select-genero").val());
-    let array = getSongsByGenero(idGenero);
-    let compilado = compilar(array);
-    $("#playlist").html(compilado);
-
-    $("#playlist li").click(function() {
-        let selected = parseInt($(this).attr("id"));
-        let index = songsGenero.songs.findIndex(song => song.id === selected);
-
-        playSong(index);
-    });
-}
-
-function getSongsByGenero(idGenero) {
-    songsGenero = {
-        songs: []
-    };
-
-    mjson.songs.forEach(function(data, index) {
-        if (data.idGenero === idGenero) {
-            songsGenero.songs.push(data);
-        }
-    });
-
-    generos.generos.forEach(function(data, index) {
-        if (data.id === idGenero) {
-            $("#img-song").attr("src", data.img);
-        }
-
-    });
-    return songsGenero;
-}
-
-function scheduleSong(id) {
-    audio.onended = function() {
-        console.log("terminó la canción");
-        playSong(id + 1);
-    };
-}
-
-
-function playSong(index) {
-    let long = songsGenero.songs;
-    if (index >= long.length) {
-        console.log("Se terminó la lista");
-        audio.pause();
-    } else {
-        $("#img-song").attr("src", songsGenero.songs[index].image);
-        $("#player").attr("src", songsGenero.songs[index].path);
-        $("#title-song").text(songsGenero.songs[index].name + " - " + songsGenero.songs[index].artist);
-        $("#title-song").attr("uk-tooltip", "title: " + songsGenero.songs[index].name + " - " + songsGenero.songs[index].artist);
-        $("#title-song").prepend('<i class="fa fa-music text-white pl-1 pr-2"></i>');
-        showEcualizador("ecualizador_" + songsGenero.songs[index].id);
-        $("#ecualizador-id").val("ecualizador_" + songsGenero.songs[index].id);
-        audio.play();
-        scheduleSong(index);
-    }
-}
-
+// mezcla el array pasado por parámetro y lo retorna
 function mezclar(array) {
     let currentIndex = array.length,
         temporaryValue, randomIndex;
@@ -236,14 +121,117 @@ function mezclar(array) {
     return array;
 }
 
+// compila la data con el template que tiene el id idTemp y lo muestra en el elemento que tiene el id idPlace
+function compilarHandlebars(data, idTemp, idPlace) {
+    // html del template
+    let temp = $(idTemp).html();
+    // utilizamos compilar con Handlebars para indicar el template dónde queremos poner la data
+    let compilar = Handlebars.compile(temp);
+    // compilamos la data dentro del template
+    let compilada = compilar(data);
+    // mostramos el html del template ya compilado
+    $(idPlace).html(compilada);
+}
+
+
+// ponemos en el select la lista de géneros
+function getListGeneros() {
+    let obj = { generos: generos }
+    compilarHandlebars(obj, "#temp_generos", "#select-genero")
+}
+
+// al cambiar el género en el select nos tremos las canciones correspondientes
+$("#select-genero").change(function() {
+    getSongs();
+});
+
+
+// obtenemos el listado de las canciones para mostrarlas
+function getSongs() {
+    audio.pause();
+    $("#player").attr("src", "");
+    $("#title-song").text("");
+    $("#title-song").attr("uk-tooltip", "title: Selecciona una canción");
+
+    let idGenero = parseInt($("#select-genero").val());
+    let array = getSongsByGenero(idGenero);
+    compilarHandlebars(array, "#temp_songs", "#playlist")
+
+
+    $("#playlist li").click(function() {
+        let selected = parseInt($(this).attr("id"));
+        let index = songsGenero.songs.findIndex(song => song.id === selected);
+
+        playSong(index);
+    });
+}
+
+// obtenemos las canciones clasificadas por género
+function getSongsByGenero(idGenero) {
+    songsGenero = {
+        songs: []
+    };
+
+    mySongs.forEach(function(data, index) {
+        if (data.idGenero === idGenero) {
+            songsGenero.songs.push(data);
+        }
+    });
+
+    generos.forEach(function(data, index) {
+        if (data.id === idGenero) {
+            $("#img-song").attr("src", data.img);
+        }
+    });
+    return songsGenero;
+}
+
+// programar la siguiente canción
+function scheduleSong(id) {
+    // cuando termina pasamos a la siguiente
+    audio.onended = function() {
+        playSong(id + 1);
+    };
+}
+
+// play song
+function playSong(index) {
+    // longitud de las canciones actuales por género
+    let long = songsGenero.songs;
+    // si no tenemos más canciones para reproducir
+    if (index >= long.length) {
+        console.log("Se terminó la lista");
+        audio.pause();
+    } else {
+        // colocamos la imágen correspondiente al tema
+        $("#img-song").attr("src", songsGenero.songs[index].image);
+        // nos tremos el path para reproducir en el tag de audio
+        $("#player").attr("src", songsGenero.songs[index].path);
+        // cambiamos el rítulo del tema debajo de la imagen
+        $("#title-song").text(songsGenero.songs[index].name + " - " + songsGenero.songs[index].artist);
+        // le agregamos el tootltip al título
+        $("#title-song").attr("uk-tooltip", "title: " + songsGenero.songs[index].name + " - " + songsGenero.songs[index].artist);
+        // le ponemos delante del título el icono de la música
+        $("#title-song").prepend('<i class="fa fa-music text-white pl-1 pr-2"></i>');
+        // mostramos el ecualizador en la cacnión corrspondiente
+        showEcualizador("ecualizador_" + songsGenero.songs[index].id);
+        // guardamos el id del ecualizador que se está mostrando
+        $("#ecualizador-id").val("ecualizador_" + songsGenero.songs[index].id);
+        // le damos play
+        audio.play();
+        // programamos la siguiente canción que llama a esta misma función al terminar
+        scheduleSong(index);
+    }
+}
+
+
+// mostrar el ecualizador por el id que pasamos por parámetro
 function showEcualizador(id) {
     $("#playlist .ecualizador").each(function(i) {
         if ($(this).attr("id") !== id) {
             $(this).css("display", "none");
         } else {
-
             $(this).css("display", "block");
-
         }
 
     });
@@ -251,7 +239,7 @@ function showEcualizador(id) {
 
 
 }
-
+// escondemos los ecualizadores
 function hideEcualizador() {
     $("#playlist .ecualizador").each(function(i) {
         $(this).css("display", "none");
@@ -259,24 +247,19 @@ function hideEcualizador() {
 
 }
 
-
-function initPayer() {
-    $("#shuffle").click(function() {
-        let mezcladas = mezclar(songsGenero.songs);
-        hideEcualizador();
-        getSongsMezcladas(mezcladas);
-        playSong(0);
-    });
-}
+// botón reproducción aleatoria
+$("#shuffle").click(function() {
+    let mezcladas = mezclar(songsGenero.songs);
+    hideEcualizador();
+    getSongsMezcladas(mezcladas);
+    playSong(0);
+});
 
 
+// obtener las canciones mezcladas
 function getSongsMezcladas(array) {
-    let temp = $("#temp_songs").html();
-    let compilar = Handlebars.compile(temp);
-
-    let newArray = { songs: array };
-    let compilado = compilar(newArray);
-    $("#playlist").html(compilado);
+    let obj = { songs: array };
+    compilarHandlebars(obj, "#temp_songs", "#playlist")
 
     $("#playlist li").click(function() {
         let selected = parseInt($(this).attr("id"));
@@ -285,3 +268,18 @@ function getSongsMezcladas(array) {
         playSong(index);
     });
 }
+
+// tag audio
+let audio = document.getElementById('player');
+
+// al pausar
+audio.onpause = function() {
+    hideEcualizador();
+};
+
+// al ejecutarse play
+audio.onplay = function() {
+    if ($("#ecualizador-id").val() !== "") {
+        showEcualizador($("#ecualizador-id").val());
+    }
+};
