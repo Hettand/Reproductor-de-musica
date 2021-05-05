@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Paola Puchetta</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--bootstrap-->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <!--font-awesome-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--uikit-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.5.4/dist/css/uikit.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+</head>
+
+<body class="fondo-reproductor" style="background-image:url(img/fondo2.jpg);">
+    <div class="w-100 m-auto">
+        <div class="row py-3 justify-content-center">
+            <div class="col-11 col-md-6 col-lg-5 form-inline row-style-1">
+                <div class="col-12">
+                    <div class="text-center div-style-1 d-flex">
+                        <img class="m-auto p-2" id="img-song" style="max-width: 100%; max-height: 100%; width: 100%;" src="">
+                    </div>
+                    <div class="w-100 px-2">
+                        <audio id="player" controls class="w-100" style="outline: none;"></audio>
+                    </div>
+                    <div class="w-100 py-3" style="height: 55px;">
+                        <span class="truncate text-white float-left pl-1 pb-3" style="width: 95%;" id="title-song"></span>
+                        <input type="hidden" id="ecualizador-id">
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="w-100 justify-content-end form-inline">
+                        <button class="btn btn-primary mr-2" id="shuffle" uk-tooltip="title:Reproducción aleatoria">
+                            <i class="fa fa-random"></i>
+                        </button>
+                        <select class="form-control text-white" id="select-genero" style="background-color: #000;outline: none;min-width: 100px;">
+                        </select>
+                    </div>
+                    <ul class="list-group mt-0" id="playlist">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--Externas-->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.4/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.4/dist/js/uikit-icons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/node-uuid/1.4.7/uuid.min.js"></script>
+
+    <script type="text/javascript" src="js/music.js"></script>
+
+
+    <!--canciones-->
+    <script type="text/x-handlebars-template" id="temp_songs">
+
+        {{#each songs}}
+        <li class="list-group-item py-2 justify-content-between form-inline li-pista" id="{{id}}">
+            <span class="truncate float-left" style="width: 85%;" uk-tooltip="title: {{name}} - {{artist}}">{{name}} - {{artist}}</span>
+            <div class="float-right div-gif ecualizador" id="ecualizador_{{id}}" style="width: 10%;display: none;"></div>
+        </li>
+        {{/each}}
+    </script>
+    <!--géneros-->
+    <script type="text/x-handlebars-template" id="temp_generos">
+        {{#each generos}}
+        <option value="{{id}}">{{name}}</option>
+        {{/each}}
+    </script>
+
+
+
+</body>
+
+</html>

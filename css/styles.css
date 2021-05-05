@@ -1,0 +1,73 @@
+.fondo-reproductor {
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: 100vw 100vh;
+    background-attachment: fixed;
+    overflow-x: hidden;
+    display: flex;
+}
+
+.bg-violeta {
+    background-color: #673ab794;
+}
+
+#player {
+    height: 40px;
+    background-color: #fff;
+}
+
+.entry-content .mejs-container .mejs-controls {
+    background: #932;
+}
+
+#playlist {
+    height: Calc(100vh - 510px);
+    overflow-y: auto;
+}
+
+.div-gif {
+    width: 10%;
+    height: 20px;
+    margin-top: -20px;
+}
+
+span.truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ecualizador {
+    background-image: url(../img/ecualizador-02.gif);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 20px;
+    margin-top: 5px;
+}
+
+.li-pista {
+    cursor: pointer;
+    background-color: #000;
+    color: #fff;
+    border-bottom: 1px solid #6666;
+}
+
+.li-pista:hover,
+.row-style-1,
+#shuffle {
+    -webkit-box-shadow: inset 6px 0px 42px -13px rgba(242, 234, 242, 1);
+    -moz-box-shadow: inset 6px 0px 42px -13px rgba(242, 234, 242, 1);
+    box-shadow: inset 6px 0px 42px -13px rgba(242, 234, 242, 1);
+}
+
+.row-style-1 {
+    background-color: #0000001a;
+}
+
+#title-song {
+    width: 95%;
+}
+
+.div-style-1 {
+    height: 250px;
+}
