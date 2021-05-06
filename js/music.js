@@ -145,6 +145,8 @@ $("#select-genero").change(function() {
     getSongs();
 });
 
+// tag audio
+let audio = document.getElementById('player');
 
 // obtenemos el listado de las canciones para mostrarlas
 function getSongs() {
@@ -153,25 +155,25 @@ function getSongs() {
     $("#title-song").text("");
     $("#title-song").attr("uk-tooltip", "title: Selecciona una canción");
 
-    let idGenero = parseInt($("#select-genero").val());
-    let array = getSongsByGenero(idGenero);
-    compilarHandlebars(array, "#temp_songs", "#playlist")
+    getSongsByGenero();
+    compilarHandlebars(songsGenero, "#temp_songs", "#playlist")
 
-
+    // evento click sobre cada item de la canción
     $("#playlist li").click(function() {
+        // guardamos el id  del li de la canción seleccionada  en esta variable
         let selected = parseInt($(this).attr("id"));
         let index = songsGenero.songs.findIndex(song => song.id === selected);
-
         playSong(index);
     });
 }
 
 // obtenemos las canciones clasificadas por género
-function getSongsByGenero(idGenero) {
+function getSongsByGenero() {
     songsGenero = {
         songs: []
     };
 
+    let idGenero = parseInt($("#select-genero").val());
     mySongs.forEach(function(data, index) {
         if (data.idGenero === idGenero) {
             songsGenero.songs.push(data);
@@ -183,7 +185,6 @@ function getSongsByGenero(idGenero) {
             $("#img-song").attr("src", data.img);
         }
     });
-    return songsGenero;
 }
 
 // programar la siguiente canción
@@ -241,10 +242,7 @@ function showEcualizador(id) {
 }
 // escondemos los ecualizadores
 function hideEcualizador() {
-    $("#playlist .ecualizador").each(function(i) {
-        $(this).css("display", "none");
-    });
-
+    $(".ecualizador").css("display", "none");
 }
 
 // botón reproducción aleatoria
@@ -269,8 +267,7 @@ function getSongsMezcladas(array) {
     });
 }
 
-// tag audio
-let audio = document.getElementById('player');
+
 
 // al pausar
 audio.onpause = function() {
